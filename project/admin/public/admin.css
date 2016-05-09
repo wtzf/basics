@@ -1,3 +1,7 @@
+.fengo{display: inline;}
+/*.fengo li{width:55px;height:13px;}*/
+.fengo select{width:55px;height:43px;}
+
 ol,ul {list-style: none;}
 a:link,
 a:visited,

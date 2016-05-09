@@ -7,20 +7,19 @@
     switch ($a) {
         case 'edit':
             $id = $_POST['id'];
-            $set = '';
-            foreach ($_POST as $key => $val) {
-                $set .= "`$key`='$val',";
-            }
-            $set = rtrim($set,',');
-            $sql = "UPDATE ".PRE."admin_user SET $set WHERE `id`='$id'";
-
+            $name = $_POST['name'];
+            $pwd = md5($_POST['pwd']);
+            $tel = $_POST['tel'];
+            $type = $_POST['type'];
+            $sql = "UPDATE ".PRE."admin_user SET `name`='$name',`pwd`='$pwd',`tel`='$tel',`type`='$type' WHERE `id`='$id'";
             $result = mysqli_query($link,$sql);
+
             if ($result && mysqli_affected_rows($link)>0) {
-                echo '<h2>编辑成功</h2>';
-                echo '<br><h2>1秒后跳转到首页 或点击此处: <a href="./index.php">回首页</a></h2>';
+
+                echo '<br><h2>修改成功将在1秒后跳转到首页';
                 echo '<meta http-equiv="refresh" content="1;./index.php">';
             }else{
-                echo '<h2>编辑失败,请重试</h2>';
+                echo '<h2>与原密码相同,请重试</h2>';
                 //失败,应该回到之前页面(来之前的页面)
                 echo '<meta http-equiv="refresh" content="3;'.$_SERVER['HTTP_REFERER'].'">';
             }

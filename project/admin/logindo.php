@@ -35,7 +35,7 @@
     $pwd = md5($_POST['pwd']);
 
     //sql
-    $sql = "SELECT `id`,`name`,`pwd` FROM ".PRE."admin_user WHERE `name`='$name'";
+    $sql = "SELECT `id`,`name`,`pwd`,`type` FROM ".PRE."admin_user WHERE `name`='$name'";
 
     $row = query($link, $sql);
 
@@ -43,6 +43,7 @@
         //如果有数据,说明用户存在
         $row = $row[0];
         // p($row);
+        // exit;
         //如果有数据,就进行密码比对
         if ($row['pwd'] == $pwd) {
             //密码一致,登录成功了!清除密码和旧验证码

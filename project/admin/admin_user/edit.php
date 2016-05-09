@@ -2,7 +2,7 @@
     require '../init.php';
     header("content-type:text/html;charset=utf-8");
     $id = $_GET['id'];
-    $sql = "SELECT `id`,`name`,`tel`,`type` FROM ".PRE."admin_user WHERE `id`='$id'";
+    $sql = "SELECT `id`,`name`,`tel`,`pwd`,`type` FROM ".PRE."admin_user WHERE `id`='$id'";
     $result = mysqli_query($link,$sql);
     if ($result && mysqli_num_rows($result)>0) {
         $row = mysqli_fetch_assoc($result);
@@ -26,12 +26,14 @@
 
         name:
         <input type="text" name="name" value="<?php echo $row['name'] ?>" placeholder="请输入用户名"><br><br>
+        pwd:
+        <input type="password" name="pwd" ><br><br>
 
         tel:
         <input type="text" name="tel" value="<?php echo $row['tel'] ?>" placeholder="请输入新tel"><br><br>
 
         type:
-        <input type="text" name="email" value="<?php echo $row['type'] ?>" placeholder="请输入新权限级别"><br><br>
+        <input type="text" name="type" value="<?php echo $row['type'] ?>" readonly><br><br>
 
         <input type="submit" value="保存编辑">
     </form>

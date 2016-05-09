@@ -29,7 +29,6 @@
             break;
 
         case 'add':
-            echo '正在添加用户....<br>';
             //表单不为空,如果有空值,回之
             foreach ($_POST as $key => $val) {
                 if ($val == '') {

@@ -1,19 +1,59 @@
 <?php 
     require '../init.php';
-    @$name=$_POST['name'];
-    if(isset($name)){
-        if (empty($name)) {
-            $sql = "SELECT `id`,`name`,`tel`,`type` FROM ".PRE."admin_user";
-        }else{
-        $sql = "SELECT `id`,`name`,`tel`,`type` FROM ".PRE."admin_user WHERE `name`='$name' " ;
-        }
-    }else{
-        $sql = "SELECT `id`,`name`,`tel`,`type` FROM ".PRE."admin_user";
+
+    $where = '';
+    $urlname = '';
+    $name = '';
+    if (isset($_GET['name']) && !empty($_GET['name'])) {
+        $name = $_GET['name'];
+        $where = "WHERE `name` LIKE '%$name%'";//SQL查询条件
+        $urlname = "&name=$name";//url的参数
     }
-    
-    
+    //分页开始
+    //总记录数
+    $sql = "SELECT count(*) total FROM s47_admin_user $where";
+    $row = query($link, $sql);
+    $total = $row[0]['total'];
+    //每页显示数
+    $num = 5;
+    //总页数
+    $allpage = ceil($total / $num);
+
+    //获取页码
+    $page = isset($_GET['page'])?(int)$_GET['page']:1;
+    //限制页码范围
+    //页码:不能小于1 不能大于$allpage
+    $page = max(1,$page);//[0,1]
+    $page = min($page,$allpage);//[接收的页数,总页数]
+
+    //获取偏移量
+    $offset = ($page-1) * $num;
+    //获取上一夜/下一夜
+    $prev = $page - 1;
+    $next = $page + 1;
+
+    //控制数组页码的显示
+    $start = max($page - 2, 1);
+    $end = min($page + 2, $allpage);
+
+    $pageurl = 'index.php';
+    //产生数字链接
+    $num_link = '';
+    for ($i = $start; $i <= $end; $i++) {
+        if ($page == $i) {
+            $num_link .= '<li class="active"><a href="./'.$pageurl.'?page='.$i.$urlname.'">'.$i.'</a></li>';
+            continue;
+        }
+        $num_link .= '<li><a href="./'.$pageurl.'?page='.$i.$urlname.'">'.$i.'</a></li>';
+    }
+    //5.SQL语句
+    $sql = "SELECT `id`,`name`,`tel`,`type` FROM ".PRE."admin_user $where LIMIT $offset,$num";
+
     //处理结果集
     $user_list = query($link,$sql);
+
+    //显示当前页查询到的记录数量
+    $rows = mysqli_affected_rows($link);
 
     //8.关闭MYSQL连接
     mysqli_close($link);
@@ -48,11 +88,11 @@
                     <li><a href="./index.php">后台用户列表</a></li>
                     <li><a href="./add.php">添加后台用户</a></li>
                   </ul>
-                  <form action="" method="post"  class="navbar-form navbar-left" >
+                  <form action="" method="get"  class="navbar-form navbar-left" >
                     <div class="form-group">
                       <input type="text" name="name" class="form-control" placeholder="请输入要查找的用户名">
                     </div>
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                   </form>
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -80,16 +120,45 @@
                         <td><?php echo $val['name'] ?></td>
                         <td><?php echo $val['tel'] ?></td>
                         <td><?php echo $val['type'] ?></td>
-                        <td>
-                            <a href="./edit.php?id=<?php echo $val['id'] ?>">编辑</a>
-                            <a href="./action.php?a=del&id=<?php echo $val['id'] ?>">删除</a>
-                        </td>
+
+                        <?php   $user_type = $_SESSION['admin']['type']; 
+                                $user_id = $_SESSION['admin']['id']; 
+                                $id = $val['id'];
+                                $type = $val['type']; ?>
+
+
+                        <?php   if ($user_type == 0) {
+                                    if ($type == 0) {   ?>
+                                        <td>
+                                            <a href="./edit.php?id=<?php echo $val['id'] ?>">编辑</a>
+                                        </td>
+                            <?php   }else{ ?>
+                                        <td>
+                                            <a href="./edit.php?id=<?php echo $val['id'] ?>">编辑</a>
+                                            <a href="./action.php?a=del&id=<?php echo $val['id'] ?>">删除</a>
+                                        </td>
+                                <?php   } ?>
+                        <?php }else{ ?>
+                                <?php   if ($type == 0) {   ?>
+                                            <td>权限不足,无法操作</td>
+                                <?php   }else{ 
+                                        if ($user_id == $id) { ?>
+                                        <td>
+                                            <a href="./edit.php?id=<?php echo $val['id'] ?>">编辑</a>
+                                        </td>
+                                    <?php }else{ ?>
+                                        <td>
+                                            同级间无法操作
+                                        </td>
+                                <?php   } ?>
+                        <?php   } ?>
+                        <?php   } ?>
                     </tr>
                 <?php endforeach ?>
                 <?php endif ?>
-                
-                
             </table>
+            <?php require ADMIN_PATH.'../com/page.php'; ?>
+                
         </div>
     </div>
 
