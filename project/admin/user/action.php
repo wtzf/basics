@@ -7,8 +7,6 @@
     switch ($a) {
         case 'edit':
             $id = $_POST['id'];
-
-            echo '<h2>要编辑的ID为'.$id.'</h2><br>';
             $set = '';
             foreach ($_POST as $key => $val) {
                 $set .= "`$key`='$val',";

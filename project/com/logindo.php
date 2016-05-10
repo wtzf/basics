@@ -2,6 +2,7 @@
     require '../init.php';
 
     //表单不为空,如果有空值,回之
+
     foreach ($_POST as $key => $val) {
         if ($val == '') {
             redirect('请完善表单信息!');
@@ -36,14 +37,17 @@
     $pwd = md5($_POST['pwd']);
 
     //sql
-    $sql = "SELECT `id`,`name`,`pwd`,`logincount` FROM ".PRE."user WHERE `name`='$name'";
-
+    $sql = "SELECT `id`,`name`,`pwd`,`logincount`,`forbid` FROM ".PRE."user WHERE `name`='$name'";
     $row = query($link, $sql);
 
     if ($row) {
         //如果有数据,说明用户存在
         $row = $row[0];
         // p($row);
+        if ($row['forbid']==1) {
+            redirect('此号已被禁止登陆,请与管理员联系!',URL.'index.php',3);
+            exit;
+        }
         //如果有数据,就进行密码比对
         if ($row['pwd'] == $pwd) {
             //密码一致,登录成功了!清除密码和就验证码

@@ -85,6 +85,11 @@
   <div class="cb"></div>
 <!-- =============================店内导航==================================== -->
   <div class="ovbox mod_topNav blackStyle ">
+        <div class="biaoti">
+          <h1 class="dabiao"><b>小兰女装</b></h1>
+          <h3 class="xiaobiao">fashion shop</h3>
+        </div>
+        
     <div class="mod_list clearfix">
       <div data-title="$commonTopNav.layoutName" data-type="topNav" data-width="1200" data-id="237592" class="mod_item w1200">
         <div class="mod_cont topNav">
@@ -99,7 +104,7 @@
             <li><a href="http://shop.mogujie.com/14jka/page/view?id=16219">【好评返现】</a></li>
             <li><a href="http://shop.mogujie.com/14jka/tuan">蘑菇团</a></li>
           </ol>
-          <div style="display: none;" class="category_list slideer">
+          <!-- <div style="display: none;" class="category_list slideer">
             <dl>
               <dd>
                 <a href="http://shop.mogujie.com/14jka/list/index?categoryId=257731">毛呢外套</a>
@@ -137,15 +142,15 @@
               <dd>
                 <a href="http://shop.mogujie.com/14jka/list/index?categoryId=287297">棉衣/棉服/羽绒服</a>
               </dd>
-            </dl>
-          </div>
+            </dl> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>
   <!-- <div class="cb"></div> -->
   </div>
   <!-- ======================主体========================================================================= -->
-  <div id="body_wrap" class="mt60">
+  <div id="body_wrap" >
     <div class="shop-detail">
     <!-- ======================详细信息========================================================================= -->
       <div class="detail-primary clearfix">
@@ -153,6 +158,7 @@
           <div class="clearfix">
             <div id="J_GoodsInfo" class="fl goods-info goods-info-normal">
               <div class="info-box">
+              <div class="fr">
                 <h1 class="goods-title"><span itemprop="name">清新袖口木耳边车线撞色短袖衬衫</span></h1>
                 <div class="goods-prowrap goods-main">
                   <div class="clearfix main-box">
@@ -212,7 +218,8 @@
                 <dl class="clearfix">
                   <dt>客服：</dt>
                   <dd>
-                    <div data-from="goodsdetail_skumtalk" data-style="default" data-bid="14jka#23" class="mogutalk_widget_btn kefu">
+                    <div data-from="goodsdetail_skumtalk" data-style=
+                    "default" data-bid="14jka#23" class="mogutalk_widget_btn kefu">
                       <!-- <iframe width="85" height="24" frameborder="0" allowtransparency="true" marginheight="0" scrolling="no" src="./【清新袖口木耳边车线撞色短袖衬衫】-衣服-服饰鞋包_女装_上装_衬衫-小蓝外贸女装-蘑菇街优店_files/enterbutton.html"></iframe> -->
                     </div>
                   </dd>
@@ -329,10 +336,10 @@
                   </div> -->
                 </div>
               </div>
-            </div>
+              </div>
             <div id="J_GoodsImg" class="fl goods-topimg">
               <div class="big-img">
-                <img width="400" alt="上衣,衬衫,宽松,学院风,显瘦" data-main="http://s16.mogucdn.com/p1/160425/62976417_ifqwizbumrstcnbshazdambqgyyde_640x960.jpg_468x468.jpg" src="http://s22.mogucdn.com/p1/160425/62976417_ie4dcnbumu3danbshazdambqgiyde_640x960.jpg_468x468.jpg" id="J_BigImg">
+                <img width="400" src="./imgs/62976417_ifqwizbumrstcnbshazdambqgyyde_640x960.jpg_468x468.jpg" id="J_BigImg">
               </div>
               <div class="small-img" id="J_SmallImgs">
                 <div class="box">
@@ -351,7 +358,8 @@
             </div>
           </div>
         </div>
-            <div class="primary-slide">
+        <div class="cb"></div>
+<!--             <div class="primary-slide">
               <div data-ptp="_rechot" id="J_ModuleLook" class="goods-recommend">
                 <p class="title"><s></s><span>热卖推荐</span></p>
               <div class="list">
@@ -373,10 +381,10 @@
                       <a target="_blank" href="http://shop.mogujie.com/detail/18ptdma?source=item_detail_hotright?traceid=detail&amp;yixiu=pc_store_right_18ptdma">
                         <img width="120" src="./【清新袖口木耳边车线撞色短袖衬衫】-衣服-服饰鞋包_女装_上装_衬衫-小蓝外贸女装-蘑菇街优店_files/62976417_ie4wenrzgy2wgntfg4zdambqgqyde_640x960.jpg_220x330.jpg">
                       </a>
-                      <span>￥39.77</span>
-                    </li>
+                      <span>￥39.77</span> -->
+<!--                     </li>
                   </ul>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

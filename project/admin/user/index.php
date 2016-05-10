@@ -48,7 +48,7 @@
         $num_link .= '<li><a href="./'.$pageurl.'?page='.$i.$urlname.'">'.$i.'</a></li>';
     }
     //5.SQL语句
-    $sql = "SELECT `id`,`name`,`tel`,`sex`,`email`,`logincount` 
+    $sql = "SELECT `id`,`name`,`tel`,`sex`,`email`,`logincount`,`forbid` 
     FROM ".PRE."user $where LIMIT $offset,$num";
 
     //处理结果集
@@ -81,7 +81,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <h2>用户信息表</h2>
+            <h1><b>用户信息表</b></h1>
             <nav class="navbar">
               <div class="container-fluid">
                 <div class="collapse navbar-collapse">
@@ -107,6 +107,7 @@
                     <th>手机号</th>
                     <th>邮箱</th>
                     <th>登录次数</th>
+                    <th>状态</th>
                     <th>操作</th>
                 </tr>
 
@@ -140,6 +141,7 @@
                         <td><?php echo $val['tel'] ?></td>
                         <td><?php echo $val['email'] ?></td>
                         <td><?php echo $val['logincount'] ?></td>
+                        <td><?php echo $val['forbid']==0?'<span class="glyphicon glyphicon-ok"></span>':'<span class="glyphicon glyphicon-remove"></span>'; ?></td>
                         <td>
                             <a href="./edit.php?id=<?php echo $val['id'] ?>">编辑</a>
                             <a href="./action.php?a=del&id=<?php echo $val['id'] ?>">删除</a>

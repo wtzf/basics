@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>添加前台用户</title>
-    <link rel="stylesheet" href="./user.css">
+    <!-- <link rel="stylesheet" href="./user.css"> -->
 </head>
 <body>
         <h1> 添加前台用户 </h1>
@@ -20,6 +20,8 @@
             <input type="radio" name="sex" value="2">保密<br><br>
             邮箱:
             <input type="text" name="email" placeholder="请输入邮箱"><br><br>
+            状态:
+            <input type="text" name="forbid" value="0">  0为允许登录,1为禁止登录<br><br>
 
             <input type="submit" value="确认添加">
         </form>

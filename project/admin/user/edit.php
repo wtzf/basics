@@ -2,7 +2,7 @@
     require '../init.php';
     header("content-type:text/html;charset=utf-8");
     $id = $_GET['id'];
-    $sql = "SELECT `id`,`name`,`sex`,`tel`,`email`,`logincount` FROM ".PRE."user WHERE `id`='$id'";
+    $sql = "SELECT `id`,`name`,`sex`,`tel`,`email`,`logincount`,`forbid`,`pwd` FROM ".PRE."user WHERE `id`='$id'";
     $result = mysqli_query($link,$sql);
     if ($result && mysqli_num_rows($result)>0) {
         $row = mysqli_fetch_assoc($result);
@@ -26,6 +26,8 @@
 
         name:
         <input type="text" name="name" value="<?php echo $row['name'] ?>" placeholder="请输入用户名"><br><br>
+<!--         pwd:
+        <input type="text" name="pwd" value="<?php echo $row['pwd'] ?>" readonly><br><br> -->
 
         sex:
         <input type="radio" name="sex" value="0" <?php echo $row['sex']==0?'checked':''; ?>>女
@@ -39,7 +41,9 @@
         <input type="text" name="email" value="<?php echo $row['email'] ?>" placeholder="请输入新email"><br><br>
 
         logincount:
-        <input type="text" anme="logincount" value="<?php echo $row['logincount'] ?>" readonly><br><br>
+        <input type="text" name="logincount" value="<?php echo $row['logincount'] ?>"><br><br>
+        forbid:
+        <input type="text" name="forbid" value="<?php echo $row['forbid'] ?>">  0为允许登录,1为禁止登录<br><br>
 
         <input type="submit" value="保存编辑">
     </form>

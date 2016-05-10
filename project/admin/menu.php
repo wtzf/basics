@@ -49,8 +49,8 @@
     </div>
     <div id="menu2" class="panel-collapse collapse">
       <div class="list-group">
-          <a href="#" target="main" class="list-group-item">分类列表</a>
-          <a href="#" target="main" class="list-group-item">添加分类</a>
+          <a href="./category/index.php" target="main" target="main" class="list-group-item">分类列表</a>
+          <a href="./category/add.php" target="main" target="main" class="list-group-item">添加顶级分类</a>
       </div>
     </div>
   </div>
@@ -67,8 +67,8 @@
     </div>
     <div id="menu3" class="panel-collapse collapse">
       <div class="list-group">
-          <a href="#" target="main" class="list-group-item">商品列表</a>
-          <a href="#" target="main" class="list-group-item">添加商品</a>
+          <a href="./goods/index.php" target="main" class="list-group-item">商品列表</a>
+          <a href="./goods/add.php" target="main" class="list-group-item">添加商品</a>
       </div>
     </div>
   </div>

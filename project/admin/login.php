@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="./imgs/bitcoin-blank.png" type="image/png" sizes="16x16">
-    <title>用户登录</title>
+    <title>后台用户登录</title>
     <!-- Bootstrap -->
     <link href="./public/css/bootstrap.min.css" rel="stylesheet">
     <!--[if lt IE 9]>

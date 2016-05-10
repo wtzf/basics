@@ -31,8 +31,8 @@
       <ul class="nav navbar-nav">
         <li><a href="./index.php" target="_top">蘑菇街商城后台</a></li>
         <li><a href="./user/index.php" target="main">用户管理</a></li>
-        <li><a href="#">分类管理</a></li>
-        <li><a href="#">商品管理</a></li>
+        <li><a href="./category/index.php" target="main">分类管理</a></li>
+        <li><a href="./goods/index.php" target="main">商品管理</a></li>
         <li><a href="#">订单管理</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
