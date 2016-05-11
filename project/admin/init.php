@@ -33,7 +33,7 @@
     // echo ADMIN_PATH.'../config.php';exit;
     require ADMIN_PATH.'../config.php';
     //引入自定义函数文件
-    require ADMIN_PATH.'./function.php';
+    require ADMIN_PATH.'../com/function.php';
 
     // 天龙前四步
     $link = mysqli_connect(HOST,USER,PWD,DB) or die('哎呀,数据库连接木有成功!');

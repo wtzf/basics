@@ -23,8 +23,8 @@
         <h1 class="col-md-12">蘑菇街后台管理系统</h1>
         <p class="col-md-12">
             <a href="./user/add.php" class="btn btn-success">添加用户</a>
-            <a href="#" class="btn btn-success">添加商品</a>
-            <a href="#" class="btn btn-success">查看商品</a>
+            <a href="./goods/index.php" target="main" class="btn btn-success">查看商品</a>
+            <a href="./goods/add.php" target="main" class="btn btn-success">添加商品</a>
             <a href="#" class="btn btn-success">处理订单</a>
             <a href="http://www.baidu.com" class="btn btn-success">我要百度</a>
         </p>
