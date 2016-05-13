@@ -9,6 +9,98 @@
 
     $a = $_GET['a'];
     switch ($a) {
+        case 'del_img':
+            $id = $_GET['id'];
+            //查询要删除的图片名和封面状态
+            $sql = "SELECT `iname`,`cover` FROM ".PRE."image WHERE id='$id'";
+            $row = query($link,$sql);
+            $filename = $row[0]['iname'];
+            $cover = $row[0]['cover'];
+            //获取图片的路径
+            $img_path = getpath(ADMIN_PATH.'../uploads/',$filename);
+
+            //判断是否为封面图?
+            if ($cover == 1) {
+                admin_redirect('不能删除封面图');
+                exit;
+            }
+
+            $sql = "DELETE FROM ".PRE."image WHERE id='$id'";
+            if (execute($link,$sql)) {
+                unlink($img_path);
+                @unlink(dirname($img_path).'/350_'.$filename);
+                @unlink(dirname($img_path).'/150_'.$filename);
+                @unlink(dirname($img_path).'/50_'.$filename);
+                admin_redirect('图片删除成功!');
+                exit;
+            }else{
+                admin_redirect('图片删除失败');
+                exit;
+            }
+            break;
+
+        case 'cover':
+            //接收商品ID和图片ID
+            $goods_id = $_GET['goods_id'];
+            $image_id = $_GET['image_id'];
+            //将该商品下的所有图片都设置为非封面 0
+            execute($link, "UPDATE ".PRE."image SET cover='0' WHERE goods_id='$goods_id'");
+            //把传过来的图片ID设为封面
+            execute($link, "UPDATE ".PRE."image SET cover='1' WHERE id='$image_id'");
+            header("location:".$_SERVER['HTTP_REFERER']);
+            break;
+
+        case 'add_img':
+            //获取商品的ID
+            $goods_id = $_POST['goods_id'];
+            //上传图片,图片处理
+            //生成保存根目录
+            $save_dir = ADMIN_PATH.'../uploads/';
+            $filename = up('file', 10485760, array('image'), $save_dir);
+            // v($filename);
+            //判断图片是否上传成功
+            if (!$filename) {
+                admin_redirect('文件上传失败!');
+                exit;
+            }
+
+            //缩放吧,骚年!
+            // 首先要得到上传图片的完整路径
+            $img_path = ADMIN_PATH.'../uploads/';
+            $img_path .= substr($filename, 0, 4).'/';
+            $img_path .= substr($filename, 4, 2).'/';
+            $img_path .= substr($filename, 6, 2).'/';
+            $img_path .= $filename;
+            // echo $img_path;
+            
+            if (
+                !zoom($img_path,350,350) 
+                || 
+                !zoom($img_path,150,150) 
+                || 
+                !zoom($img_path,50,50)
+            ) {
+                //其中有一张缩放失败就,删除原图及小图
+                unlink($img_path);
+                @unlink(dirname($img_path).'/350_'.$filename);
+                @unlink(dirname($img_path).'/150_'.$filename);
+                @unlink(dirname($img_path).'/50_'.$filename);
+                admin_redirect('图片缩放失败!');
+                exit;
+            }
+
+            //文件处理成功,开始写入商品图片表数据
+            $sql = "INSERT INTO ".PRE."image (`iname`,`goods_id`,`cover`) VALUES('$filename','$goods_id','0')";
+            //判断执行结果
+            if (execute($link,$sql)) {
+                admin_redirect('图片添加成功');
+                exit;
+            }else{
+                admin_redirect('图片添加失败');
+                exit;
+            }
+            break; 
+            
         case 'is_hot':
             //是否显示分类
             $id = $_GET['id'];
@@ -41,7 +133,7 @@
             break;
 
         case 'edit':
-            // echo '编辑功能自己写';
+
             $id=$_POST['id'];
             $gname=$_POST['gname'];
             $price=$_POST['price'];
@@ -53,18 +145,13 @@
             $cname=$_POST['cname'];
             $cname=strtok($cname,'--');
             $cname=strtok('--');
-            // p($_POST);
-            // p($cname);
-            // exit;
-            
 
             $sql_c = "SELECT `id`,`pid`,`path` FROM ".PRE."category WHERE `cname`='$cname'";
             $arr = query($link,$sql_c);
             $c_id=$arr['0']['id'];
             $pid=$arr['0']['pid'];
             $path=$arr['0']['path'];
-            // p($arr['0']);
-            // exit;
+
             //不能修改到顶级分类
             if ($pid != 0 && $path != '0,') {
                 //判断有无子分类
@@ -82,11 +169,7 @@
             
             $sql = "UPDATE ".PRE."goods SET `gname`='$gname',`cate_id`='$c_id',`price`='$price',`stock`='$stock',`state`='$state',`is_hot`='$is_hot',`is_new`='$is_new',`msg`='$msg' WHERE id='$id'";
             $result = admin_execute($link,$sql);
-            // p($result);  
-            // exit;
-            // p($_POST);
-            // p($result);
-            // exit;
+
             if ($result && mysqli_affected_rows($link)>0) {
                 echo '<h2>编辑成功</h2>';
                 echo '<br><h2>1秒后跳转到首页 或点击此处: <a href="./index.php">回首页</a></h2>';
