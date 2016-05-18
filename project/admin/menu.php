@@ -85,7 +85,23 @@
     </div>
     <div id="menu4" class="panel-collapse collapse">
       <div class="list-group">
-          <a href="#" target="main" class="list-group-item">订单列表</a>
+          <a href="./order/index.php" target="main" class="list-group-item">订单列表</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mt20"></div>
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <a data-toggle="collapse" data-parent="#accordion" href="#menu5">
+        <h4 class="panel-title">
+          评论管理
+        </h4>
+      </a>
+    </div>
+    <div id="menu5" class="panel-collapse collapse">
+      <div class="list-group">
+          <a href="./comment/index.php" target="main" class="list-group-item">评论列表</a>
       </div>
     </div>
   </div>

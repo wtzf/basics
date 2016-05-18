@@ -1,4 +1,24 @@
-<?php require './init.php' ?>
+<?php require './init.php';
+
+    if (empty($_SESSION['home'])) {
+      redirect('请先登录',URL.'login.php',3);
+      exit;
+    }
+
+    $user_id = $_SESSION['home']['id'];
+    // 查找数据库个人信息表
+    $sql = "SELECT `id`,`name`,`sex`,`tel`,`email` FROM ".PRE."user WHERE `id`='$user_id'";
+    $row = query($link, $sql);
+    $row = $row['0'];
+    $user_name = $row['name'];
+    $user_id = $row['id'];
+
+    // 根据用户的ID 在订单表中查找出其所有的订单号。订单ID和订单的总价
+    $sql = "SELECT `id`,`ordernum`,`allprice`,`status` FROM ".PRE."order WHERE user_id = $user_id ORDER BY id DESC";
+    $str = query($link,$sql);
+
+    // p($_SESSION);
+?>
 
 <!DOCTYPE html>
 <html lang="cn">
@@ -25,143 +45,180 @@
   <?php require PATH.'com/search.php'; ?>
 
   <!-- ====================主体========================== -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+            <h2>用户名:<?php echo $user_name ?></h2>
+            <h1><a href="./myself.php?a=gai">修改资料</a></h1>
+            <h1><a href="./myself.php?a=pwd">修改密码</a><h1>
+            <h1><a href="./myself.php?a=order">订单中心</a><h1>
 
-<div id="body_wrap">
-    <div class="fm960" id="body">
-        <div class="mu_wrap clearfix">
-            <div class="mu_nav_wrap">
-                <!-- 导航 -->
-                <link href="http://www.mogujie.com/__/static/pc/member/level.css" rel="stylesheet">
-<!--info-->
-<div class="mu_nav_info">
-    <div class="mu_nav_info_avatar">
-        <div class="mu_nav_info_avatar_mk"></div>
-        <img width="100" height="100" title="H丶W丶T" alt="H丶W丶T" src="http://s22.mogucdn.com/p1/160503/upload_ie4dkyzymjrtazbuhazdambqgiyde_40x40.jpg">
-    </div>
-    <p class="mu_nav_info_uname">H丶W丶T</p>
-    <!-- <a href="http://www.mogujie.com/member" class="mu_nav_info_ulot" style="width:16px;" target="_blank"><span style="float:left;width: 16px; display: inline-block; height: 16px; margin-top: 3px;" class="vip_level0" id="vip_level"></span></a> -->
+            </div>
+            <div class="col-md-10">
+                <?php if (@$_GET['a'] =='gai'){ ?>
+                    <form class="form-horizontal" action="./com/myselfdo.php" method="post">
+                        <input type="hidden" name="id" value="<?php echo $user_id ?>">
+                        <div class="form-group h4">
+                          <label for="inputEmail3" class="col-md-2 control-label">用户名:</label>
+                          <div class="col-md-10">
+                            <input type="text" class="form-control" value="<?php echo $user_name ?>"  name="name" id="inputEmail3">
+                          </div>
+                        </div>
+                        <div class="form-group h4">
+                          <label for="inputPassword3" class="col-md-2 control-label">性别:</label>
+                          <div class="col-md-10">
+                            <input type="text" class="form-control" value="<?php echo $row['sex'] ?>" name="sex" id="inputPassword3">
+                          </div>
+                        </div>
+                        <div class="form-group h4">
+                          <label for="inputPassword3" class="col-md-2 control-label">电话:</label>
+                          <div class="col-md-10">
+                            <input type="text" class="form-control" value="<?php echo $row['tel'] ?>" name="tel" id="inputPassword3">
+                          </div>
+                        </div>
+                        <div class="form-group h4">
+                          <label for="inputPassword4" class="col-md-2 control-label">邮箱:</label>
+                          <div class="col-md-10">
+                            <input type="text" class="form-control" value="<?php echo $row['email'] ?>" name="email" id="inputPassword4">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                              <button type="submit" class="btn btn-success btn-lg">确认</button>
+                              <button type="reset" class="btn btn-success btn-lg">重置</button>
+                            </div>
+                          </div>
+                        </form>
+                <?php }elseif(@$_GET['a'] == 'pwd'){ ?>
+                <div class="conatiner">
+                    <div class="clearfix "></div>
+                    <h1 class="text-center mt50 h1"> <b>设置新密码</b></h1>
+                    <hr>
+                    
+                    <form action="./com/changpwddo.php" method="post" class="form-horizontal col-md-6 col-md-offset-2">
+                    <div class="form-group h3">
+                        <label for="pwd" class="col-md-4 control-label">新 密 码 </label>
+                        <div class="col-md-8">
+                            <input type="password" name="pwd" class="form-control input-lg" id="pwd" placeholder="请输入新密码..">
+                            <span >*请输入新密码</span>
+                        </div>
+                    </div>
 
-</div>
-<!-- info end -->
+                    <div class="form-group h3">
+                        <label for="repwd" class="col-md-4 control-label">确认密码</label>
+                        <div class="col-md-8">
+                            <input type="password" name="repwd" class="form-control  input-lg" id="repwd" placeholder="把上面那家伙再来一次">
+                            <span>*请再次输入新密码</span>
+                        </div>
+                    </div>
+                      <div class="form-group mt20">
+                        <div class="col-md-8 col-md-offset-4">
+                          <button type="submit" class="btn btn-primary btn-lg btn-block">确定修改</button>
+                        </div>
+                      </div>
+                    </form>
+                    <?php }else{ ?>
+                    <table class="table h5">
+                        <tr class="h3">
+                            <th>宝贝</th>
+                            <th>单价</th>
+                            <th>数量</th>
+                            <th>总价</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        <?php if (empty($str)){?>
+                                <tr class="h1 text-center"><td colspan="6" ><b>暂无订单</b></td></tr>
+                                <tr class="h1 text-center"><td colspan="6" ><b><a href="./index.php">前去购物</a></b></td></tr>
+                    <?php      }else{ ?>
 
-<!-- nav -->
-  <dl class="mu_nav h4">
-    <dt class="h3">我的订单</dt>
-    <dd class="mt5">
-        <a href="/trade/order/list4buyer/?stage=0">全部订单</a>
-    </dd>
-    <dd class="mt5">
-        <a href="/trade/order/list4buyer/?stage=1">待付款 </a>
-    </dd>
-    <dd class="mt5">
-        <a href="/trade/order/list4buyer/?stage=4">待收货 </a>
-    </dd>
-    <dd class="mt5">
-        <a href="/trade/order/list4buyer/?stage=5">待评价 </a>
-    </dd>
-    <dd class="mt5">
-        <a href="/trade/order/list4buyer/?stage=6">退货退款</a>
-    </dd>
-  </dl>
+                   <?php foreach ($str as $key => $value) {
+                          $order_id =$value['id'];
+                          $status =$value['status'];
+                          $ordernum = $value['ordernum']; ?>
+                        <tr><td colspan="6"  class="h4">订单号:<?php echo $ordernum ?></td></tr>
+              <?php   $sql = "SELECT `goods_id`,`price`,`qty` FROM ".PRE."ordergoods WHERE order_id = $order_id";
+                        $arr = query($link,$sql); 
+                        foreach ($arr as $key => $val) {
+                        $goods_id =$val['goods_id'];
+                        $sql = "
+                          SELECT i.iname, g.gname, g.price
+                          FROM ".PRE."goods g,".PRE."image i
+                          WHERE g.id = i.goods_id AND g.id=$goods_id";
+                        $result = query($link,$sql); 
+                        foreach ($result as $key => $v){ ?>
 
-  <dl class="mu_nav mt20">
-    <dt class="mt5 h3"><a href="/trade/address">地址管理</a></dt>
-  </dl>
+                        <tr>
+                            <td>
+                                <a href="./xiangqing.php?id=<?php echo $key ?>&gname=<?php echo $v['gname'] ?>">
+                                </a>
+                                <a href="./xiangqing.php?id=<?php echo $key ?>&gname=<?php echo $v['gname'] ?>">
+                                    <img src="<?php echo getpath(URL.'uploads/',$v['iname'],'b') ?>">
+                                    <?php echo $v['gname'] ?>
+                                </a>
+                            </td>
+                            <td class="h4"><?php echo $v['price'] ?></td>
+                            <td class="h4">
+                                <?php echo $val['qty'] ?>
+                            </td>
+                            <td class="h4"><?php echo $v['price'] * $val['qty'] ?></td>
+                            <td class="h4">
+                                <?php switch ($status) {
+                                case '0':
+                                    echo '未发货<br><a href="./admin/order/action.php?a=che&order_id='.$order_id.'">取消订单</a>';
+                                    break;
+                                case '1':
+                                    echo '已发货<br><a href="./admin/order/action.php?a=shou&order_id='.$order_id.'">确定收货</a>';
+                                    break;
+                                case '2':
+                                    echo '已收货';
+                                    break;
+                                case '3':
+                                    echo '已失效';
+                                    break;
+                                case '4':
+                                    echo '交易结束';
+                                    break;
+                                }
+                                ?>
+                            </td>
+                            <td class="h4">
+                            <?php if ($status=='2') {
+                                $sql = "SELECT `id` FROM ".PRE."ordergoods WHERE order_id = $order_id AND goods_id = $goods_id";
+                                $arr = query($link,$sql); 
+                                $og_id = $arr['0']['id'];
+                                $p_id = $_SESSION['home']['id'];
 
-  <dl class="mu_nav mt10">
-    <dt class=" h3"><a href="/trade/safety">安全设置</a></dt>
-  </dl>
+                                $sql = "SELECT `status` FROM ".PRE."comment WHERE og_id = $og_id AND p_id = $p_id";
+                                $a = query($link,$sql); 
+                                $statusp = $a['0']['status'];
+                                if ($statusp=='0') {
+                                    echo '评价';
+                                }else{
+                                    echo '<a href="./comment.php?goods_id='.$goods_id.'&order_id='.$order_id.'">评价</a>';
+                                }
+                                
+                            }else{
+                                echo '评价';
+                            }
+                            ?>
+                            </td>
+                        </tr>
 
-<!--   <dl class="mu_nav">
-    <dt>维权管理</dt>
-    <dd><a href="/trade/complaint/list">投诉管理</a></dd>
-    <dd><a href="/trade/report/list4buyer">举报管理</a></dd>
-     <dd><a href="/support/rights/proof/list">被盗举证</a></dd> 
-  </dl> -->
 
-  <dl class="mu_nav mt20 h4">
-    <dt class="h3">帐号设置</dt>
-    <dd class="c"> <a href="/settings/personal">基本信息</a> </dd>
-    <dd class="mt5 "> <a href="/settings/avatar">修改头像</a> </dd>
-  </dl>
-<!-- nav end -->
-  </div>
-  <div class="mu_content_wrap ">
-    <script src="/js/city_utf8.js?v=1440080016" type="text/javascript"></script>
 
-  <div class="fl" id="setting_box">
-    <form>
-    <div class="settings_title">
-      <h1><span>基本资料</span></h1>
-    </div>
-    <div class="setting_basic" id="setting_form">
-      <form method="post" action="">
-      <dl>
-        <dd>昵称：</dd>
-        <dt class="unick">
-          <input type="text" value="H丶W丶T" name="unick" class="r3">
-          <div class="iner"></div>
-        </dt>
-        <dd>性别：</dd>
-        <dt style="line-height: 30px;" class="sex">
-          <input type="radio" style="margin:0" id="" value="2" name="sex">女
-          <input type="radio" id="" value="1" name="sex" checked="">男
-        </dt>
-        <dd>所在地：</dd>
-        <dt class="location">
-          <input type="text" value="" name="province" class="r3">
-        </dt>
-        <dd>生日：</dd>
-        <dt class="birthday">
-          <select name="born[]">
-            <option></option>
-            <?php for ($i=2016; $i > 1848; $i--) { 
-                  echo '<option value="$i">'.$i .'</option><br> ';
-            }?>
-          </select>&nbsp;年&nbsp;
-          <select id="month" name="born[]">
-            <option></option>
-            <?php for ($i=1; $i<13; $i++) { 
-                  echo '<option value="$i">'.$i .'</option><br> ';
-            }?>
-          </select>&nbsp;月&nbsp;
-          <select id="day" name="born[]">
-            <option></option>
-            <?php for ($i=1; $i<31; $i++) { 
-                  echo '<option value="$i">'.$i .'</option><br> ';
-            }?>
-          </select>&nbsp;日
-        </dt>
-      </dl>
-    <div class="settings_title mt30">
-      <span>其他信息</span>
-        <dd>自我介绍：</dd>
-          <dt><textarea class="r3" rows="10" id="" name="introduce" style="color: rgb(204, 204, 204); border-color: rgb(207, 207, 207);">随便写点什么，让大家了解你吧。</textarea></dt>
-          <dd>&nbsp;&nbsp;</dd>
-          <dt><input type="button" value="确认修改" class="green_button r3"></dt>
-        </form>
+                  <?php  }} } ?>
+                        <?php } ?>
+                    </table>
+
+
+
+
+
+                <?php } ?>
+            </div>
         </div>
-        </div>
-      </div>
     </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

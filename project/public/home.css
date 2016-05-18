@@ -1,7 +1,7 @@
 *{
 	padding:0px;
 	margin:0px;
-	list-style: none;
+	list-style:none;
 	text-decoration:none;
 }
 
@@ -21,7 +21,9 @@
 .mb10{margin-bottom: 10px;}
 
 .bd{border:1px solid #ccc;}
+.bdr{border:2px solid #f00;}
 .bdb{border-bottom:1px dashed #ccc;}
+.bdc{border:2px solid #ccc;}
 
 .bgc{background:#ccc;}
 .bgr{background:#f00;}
@@ -46,16 +48,16 @@
       white-space: nowrap; /*确定超出宽度字符不换行*/
     }
 
-    .spic img{
-        border:1px solid #fff;
+.spic img{
+    border:1px solid #fff;
     }
-    .spic img:hover{
-        border:1px solid #f00;
-        box-shadow: 0 0 10px #f00;
+.spic img:hover{
+    border:1px solid #f00;
+    box-shadow: 0 0 10px #f00;
     }
 
-    .zan{
-        font-size: 20px;
+.zan{
+    font-size: 20px;
     }
 /*===================LOGO==========================*/
 #header{border-bottom:2px solid #f46;width:100%;}
@@ -396,7 +398,26 @@ element.style {
 }
 
 /*======================二级页==============================*/
-
+.c1{
+  height:40px;
+}
+.c1 li{
+  height: 30px;
+  background:#ccf;
+}
+.c3 li{
+  height: 30px;
+  background:#ccc;
+}
+.c2:visited{
+  background:red;
+}
+.c2:hover{
+  color: #00f;
+}
+.c2:active{
+  color:#f00;
+}
 
 
 

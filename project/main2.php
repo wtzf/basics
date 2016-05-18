@@ -9,11 +9,12 @@
     //1.拼接自己的 "path,id," 条件
       $sql = "SELECT id,cname,path,concat(path,id,',') bpath FROM ".PRE."category WHERE id='$cate_id'";
       $row1 = query($link, $sql);
-      $cname = $row1[0]['cname'];
+      $row1= $row1['0'];
+      $cname = $row1['cname'];
 
-      $bpath = $row1[0]['bpath'];
+      $bpath = $row1['bpath'];
 
-      $id = $row1[0]['id'];
+      $id = $row1['id'];
 
       $sql="SELECT id FROM ".PRE."category WHERE path LIKE '$bpath%'";
         $result=query($link,$sql);
@@ -62,7 +63,24 @@
       $list=query($link,$sql);
       // p($list);
 
+
     }
+      $sql = "SELECT `id`,`cname`,`path` FROM ".PRE."category WHERE `display`='1' AND `path` LIKE '0,_,_,'";
+      $result = query($link, $sql);
+      if (empty($_GET['bpath']) ) {
+        $bpath=$result['0']['path'].$result['0']['id'].',';
+      }else{
+
+        $bpath=$_GET['bpath'].$_GET['cate_id'].',';
+
+      }
+      
+      // $path=$path.'_,';
+      // p($bpath);
+      // p($result);
+      $sql = "SELECT `id`,`cname`,`path` FROM ".PRE."category WHERE `display`='1' AND `path` LIKE '$bpath'";
+      $arr = query($link, $sql);
+      // p($arr);
 
 ?>
 
@@ -97,15 +115,39 @@
 
 <!-- ==========================================衣服================================================ -->
     <div class="container">
+        <div class="row">
+          <div class="col-md-12 bdc mt30">
+            <ul class="list-inline h3 bdb c1 mt30">
+
+            <?php  foreach ($result as  $v) { 
+              ?>
+              <li><a href="./main2.php?bpath=<?php echo $v['path'] ?>&cate_id=<?php echo $v['id'] ?>" class=" text-muted c2"><?php echo $v['cname'] ?></a></li>
+        <?php  } ?>
+            </ul>
+            <ul class="list-inline h3 mt20 c3">
+        <?php  foreach ($arr as  $val) { ?>
+              <li><a href="./main2.php?cate_id=<?php echo $val['id'] ?>" class="text-muted "><?php echo $val['cname'] ?></a></li>
+        <?php  } ?>
+            </ul>
+          </div>
+          <div class="col-md-12"></div>
+
+
+
+        </div>
+        <?php  if (empty($list)) { ?>
+            <div class="row h1">
+                <h2><a href="./main2.php">全部商品</a></h2>
+                <hr>
+            </div>
+      <?php redirect('此分类暂无商品',URL.'main2.php',2); ?>
+
+      <?php }else{?>
         <div class="row h1">
-            <h2>全部商品</h2>
+            <h2><a href="./main2.php">全部商品</a></h2>
             <hr>
         </div>
         <div class="row">
-        <?php  if (empty($list)) {
-            redirect('此分类暂无商品',URL.'main2.php',2);
-
-          }else{?>
           <?php foreach ($list as $key => $val): ?>
             <div class="col-md-3">
               <div class="thumbnail s1">

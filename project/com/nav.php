@@ -25,9 +25,9 @@
           <li><a href="<?php echo URL ?>login.php">登录</a></li>
 
 
-          <li><a href="./dingdan.php"> <span class="glyphicon glyphicon-th-list" style="color:#666666;font-size:10px"></span> 我的订单</a></li>
+          <li><a href="./login.php"> <span class="glyphicon glyphicon-th-list" style="color:#666666;font-size:10px"></span> 我的订单</a></li>
 
-          <li><a href="./shopping.php"> <span class="glyphicon glyphicon-shopping-cart" style="color:#FF4466;font-size:10px"></span> 购物车</a></li>
+          <li><a href="./login.php"> <span class="glyphicon glyphicon-shopping-cart" style="color:#FF4466;font-size:10px"></span> 购物车</a></li>
 
           <li><a href="./login.php">客户服务</a></li>
 
@@ -56,11 +56,11 @@
             </ul>
           </li>
 
-          <li><a href="dingdan.php"> <span class="glyphicon glyphicon-th-list" style="color:#666666;font-size:10px"></span> 我的订单</a></li>
+          <li><a href="./com/address.php"> <span class="glyphicon glyphicon-th-list" style="color:#666666;font-size:10px"></span> 我的订单</a></li>
 
           <li><a href="./shopping.php"> <span class="glyphicon glyphicon-shopping-cart" style="color:#FF4466;font-size:10px"></span> 购物车</a></li>
 
-          <li><a href="./com/404.php">客户服务</a></li>
+          <li><a href="./com/404.php">登录次数:<?php echo $_SESSION['home']['logincount'] ?></a></li>
           
           <li class="dropdown">
             <a href="./index.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">    <span class="glyphicon glyphicon-home" style="color:#E92E22;font-size:15px"></span> 我的小店 <span class="caret"></span></a>
@@ -71,6 +71,7 @@
               <li><a href="./com/404.php">市场入驻</a></li>
             </ul>
           </li>
+
         </ul>
         <?php endif ?>
     </div>

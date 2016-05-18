@@ -89,9 +89,15 @@
                     admin_redirect('不能删除,该类下还有子类');
                     exit;
                 }
-
-                //2. 当前分类下还有商品,也不能删除(将来自己做)
                 
+                //2. 当前分类下还有商品,也不能删除(将来自己做)
+                $sql = "SELECT `id` FROM ".PRE."goods WHERE cate_id = $id";
+                $arr = query($link,$sql);
+                if (!empty($arr)) {
+                    admin_redirect('不能删除,该类下还有商品');
+                    exit;
+                }
+
 
                 //删除分类
                 $sql = "DELETE FROM ".PRE."category WHERE id='$id'";

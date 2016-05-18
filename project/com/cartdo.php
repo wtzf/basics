@@ -65,22 +65,32 @@
             break;
 
         case 'buy':
-            if (empty($_SESSION['admin'])) {
+            if (empty($_SESSION['home'])) {
               redirect('请登录后点击购买',URL.'login.php',3);
               exit;
             }
+
             //接收商品信息
             $goods_id = $_GET['goods_id'];
             $qty = $_GET['qty'];
     
             //通过查询商品表的库存来判断用户购买数量属否合法
-            
+            $sql = "SELECT stock FROM ".PRE."goods WHERE id='$goods_id'";
+            $row = query($link ,$sql);
+            $row = $row[0];
+            $stock = $row['stock'];
+            if ($qty > $stock) {
+                $qty = $stock;
+            }
             //如果商品已经存在,则只添加数量
             if (!empty($_SESSION['cart'][$goods_id])) {
                 //之前的数量加上 新出传过来的数量
                 $_SESSION['cart'][$goods_id]['qty'] += $qty;
+                if ($_SESSION['cart'][$goods_id]['qty'] > $stock) {
+                    $_SESSION['cart'][$goods_id]['qty'] = $stock;
+                }
                 //跳转购物车展示页
-                redirect('正在生成购物车.....', URL.'shopping.php',1);
+                redirect('正在生成购物车.....', URL.'./shopping.php',1);
                 exit;
             }
 
@@ -98,7 +108,7 @@
              
             //将信息存入sessino之中
             $_SESSION['cart'][$goods_id] = $row;
-            redirect('正在生成购物车.....', URL.'shopping.php',1);
+            redirect('正在生成购物车.....', URL.'./shopping.php',1);
             break;
         
    
@@ -108,11 +118,20 @@
             $qty = $_GET['qty'];
     
             //通过查询商品表的库存来判断用户购买数量属否合法
-            
+            $sql = "SELECT stock FROM ".PRE."goods WHERE id='$goods_id'";
+            $row = query($link ,$sql);
+            $row = $row[0];
+            $stock = $row['stock'];
+            if ($qty > $stock) {
+                $qty = $stock;
+            }
             //如果商品已经存在,则只添加数量
             if (!empty($_SESSION['cart'][$goods_id])) {
                 //之前的数量加上 新出传过来的数量
                 $_SESSION['cart'][$goods_id]['qty'] += $qty;
+                if ($_SESSION['cart'][$goods_id]['qty'] > $stock) {
+                    $_SESSION['cart'][$goods_id]['qty'] = $stock;
+                }
                 //跳转购物车展示页
                 header("location:".$_SERVER['HTTP_REFERER']);
                 exit;

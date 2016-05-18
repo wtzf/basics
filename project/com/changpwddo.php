@@ -28,8 +28,13 @@
     $sql = "UPDATE ".PRE."user SET `pwd`='$pwd' WHERE `id`='$id' ";
     unset($_SESSION['home']);
     if (execute($link,$sql)) {
-        redirect('修改成功!',URL.'index.php');
+        if (empty($_SESSION['home']['pwd'])) {
+            redirect('修改成功!',URL.'myself.php',1);
+            exit;
+        }else{
+        redirect('修改成功!',URL.'index.php',1);
         exit;
+        }
     }else{
         redirect('修改失败,请重试!');
         exit;

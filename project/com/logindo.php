@@ -3,6 +3,10 @@
 
     //表单不为空,如果有空值,回之
 
+    if (!empty($_SESSION['home'])) {
+        redirect('用户已登录!','../index.php',1);
+        exit;
+    }
     foreach ($_POST as $key => $val) {
         if ($val == '') {
             redirect('请完善表单信息!');
@@ -63,15 +67,15 @@
             // p($sql);
             $r = mysqli_query($link, $sql);
             // p($r);
-            redirect('登录成功!',URL.'index.php',1);
+            redirect('登录成功!','../index.php',1);
             exit;
         }else{
-            //密码不一致
-            // redirect('密码错误!!');
+            // 密码不一致
+            redirect('密码错误!!');
         }
     }else{
         //用户名不存在
-        redirect('用户名不存在!');
+        redirect('用户名不存在!','../reg.php');
         exit;
     }
 

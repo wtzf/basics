@@ -1,4 +1,5 @@
-<?php require './init.php' ?>
+<?php require './init.php';
+?>
 
 <!DOCTYPE html>
 <html lang="cn">
@@ -74,12 +75,12 @@
                 </tr>
                 <?php $total += $val['price'] * $val['qty'];//总价 ?>
                 <?php endforeach ?>
-                <tr  class="h3">
+                <tr class="h3">
                     <td colspan="6" class="text-right">
                         <a href="./index.php" class="btn btn-success btn-lg">继续购物</a>
                         <a href="./com/cartdo.php?a=alldel" class="btn btn-danger btn-lg">清空购物车</a>
                         <a  class="btn btn-default btn-lg">总计: <?php echo $total ?></a>
-                        <a href="dingdan.php?a=add&goods_id=<?php echo $key ?>" class="btn btn-primary btn-lg">去结算</a>
+                        <a href="./com/orderdo.php?a=add&goods_id=<?php echo $key ?>" class="btn btn-primary btn-lg">去结算</a>
                     </td>
                 </tr>
             </table>

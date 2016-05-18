@@ -22,7 +22,7 @@
 <!-- 引入导航条 -->
 <?php require PATH.'com/nav.php'; ?>
 
-<div class="conatiner mt50">
+    <div class="conatiner mt50">
 
         <div class="clearfix mt50"></div>
         <h1 class="text-center mt50 h1"> <b>设置新密码</b></h1>

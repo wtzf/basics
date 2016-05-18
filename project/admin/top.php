@@ -33,7 +33,8 @@
         <li><a href="./user/index.php" target="main">用户管理</a></li>
         <li><a href="./category/index.php" target="main">分类管理</a></li>
         <li><a href="./goods/index.php" target="main">商品管理</a></li>
-        <li><a href="#">订单管理</a></li>
+        <li><a href="./order/index.php" target="main">订单管理</a></li>
+        <li><a href="./comment/index.php" target="main">评论管理</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">最近登录时间: <?php echo date('Y年m月d日 H:i:s') ?></a></li>

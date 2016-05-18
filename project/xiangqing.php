@@ -1,5 +1,9 @@
 <?php require './init.php';
     $gname = $_GET['gname'];
+    $goods_id = $_GET['id'];
+    $sql = "SELECT `id` FROM ".PRE."ordergoods WHERE goods_id = $goods_id ORDER BY id DESC";
+    $str = query($link,$sql);
+
 
 
 
@@ -32,11 +36,38 @@
 
     <!-- 引入商品详情 -->
     <?php require PATH.'com/shop.php'; ?>
+    
+    <div style="height:3px;" class="col-md-12 bg-danger mt50"></div>
+    <!-- 评论显示 -->
+    <div class="container">
+    <div class="row mt50">
+    <h1 class="mt50">评价：</h1>
+    <?php
+    foreach ($str as $key => $v) {
+        $og_id=$v['id'];
 
-
-
-
-
+        $sql = "SELECT `p_id`,`comment`,`return` FROM ".PRE."comment WHERE og_id = $og_id AND status=0 ORDER BY id DESC";
+        if (false !== $arr = query($link,$sql)) {
+            foreach ($arr as $key => $val) {
+                $p_id = $val['p_id'];
+              // p($val);
+                $sql = "SELECT `name` FROM ".PRE."user WHERE id = $p_id";
+                $res = query($link,$sql);
+                $name = $res['0']['name']; ?>
+                <div class=" bg-success mt20">
+                    <h3 class="text-primary">用户：<?php echo $name ?></h3>
+                    <h3 class="text-success">评价：<?php echo $val['comment'] ?></h3>
+                    <h3 class="text-danger">回复：<?php 
+                        if (empty($val['return'])) {
+                          echo '店家暂未回复';
+                        }else{
+                         echo $val['return'] ;
+                        }?>
+                    </h3>
+                </div>
+   <?php }   }  }?>
+            </div>
+        </div>
 
 
 
