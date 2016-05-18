@@ -116,14 +116,14 @@
           </div><!-- /.container-fluid -->
         </nav>
             <table class="table h5">
-                <tr class="h3">
-                    <th>宝贝</th>
-                    <th>单价</th>
-                    <th>数量</th>
-                    <th>总价</th>
+                <tr class="h3 info">
+                    <th class="col-md-6 text-center">宝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贝&nbsp;&nbsp;&nbsp;&nbsp;信&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;息</th>
+                    <th class="col-md-2">单价</th>
+                    <th class="col-md-2">数量</th>
+                    <th class="col-md-2">总价</th>
                 </tr>
             <?php if (empty($str)){?>
-                    <tr class="h1 text-center"><td colspan="6" ><b>暂无订单</b></td></tr>
+                    <tr class="h1 text-center "><td colspan="6" ><b>暂无订单</b></td></tr>
         <?php      }else{ 
 
                 foreach ($str as $k => $value) {
@@ -136,46 +136,44 @@
                         FROM ".PRE."goods g,".PRE."image i
                         WHERE g.id = i.goods_id AND g.id=$goods_id";
                     $result = query($link,$sql);
-                        $sql = "SELECT `p_id`,`comment`,`return` FROM ".PRE."comment WHERE `og_id`='$og_id' ";
-                        $a = query($link,$sql);
-                        $p_id = $a['0']['p_id'];
-                        $comment = $a['0']['comment'];
-                        $return = $a['0']['return'];
-                        $sql = "SELECT `name` FROM ".PRE."user WHERE id=$p_id";
-                        $r = query($link,$sql);
-                        $name = $r['0']['name'];
-                            foreach ($result as $key => $val){ $v = $val; }?>
-                                <tr>
-                                    <td>
-                                        <img src="<?php echo getpath(ADMIN_URL.'../uploads/',$v['iname'],'b') ?>">
-                                    </td>
-                                    <td>
-                                        <?php echo $v['gname'] ?>
-                                    </td>
-                                    <td class="h4"><?php echo $value['price'] ?></td>
-                                    <td class="h4">
-                                        <?php echo $value['qty'] ?>
-                                    </td>
-                                    <td class="h4"><?php echo $value['price'] * $value['qty'] ?></td>
-                                </tr>
-                                <tr>
-                                    <td class="h4 col-md-2" >用户:<?php echo $name ?></td>
-                                    <td class="h4">评价:<?php echo $comment; ?></td>
-                                    <td class="h4">回复:<?php 
-                                        if (@empty($return)) { ?>
-                                            <form action="./action.php" method="post">
-                                                <input type="hidden" name="og_id" value="<?php echo $og_id ?>">
-                                                <input type="hidden" name="p_id" value="<?php echo $p_id ?>">
-                                                <input type="text" name="huifu">
-                                                <input type="submit" value="回复">
-                                            </form>
-                                 <?php  }else{
-                                        echo $return;
-                                        }
+                    $sql = "SELECT `p_id`,`comment`,`return` FROM ".PRE."comment WHERE `og_id`='$og_id' ";
+                    $a = query($link,$sql);
+                    $p_id = $a['0']['p_id'];
+                    $comment = $a['0']['comment'];
+                    $return = $a['0']['return'];
+                    $sql = "SELECT `name` FROM ".PRE."user WHERE id=$p_id";
+                    $r = query($link,$sql);
+                    $name = $r['0']['name'];
+                        foreach ($result as $key => $val){ $v = $val; }?>
+                            <tr class="active">
+                                <td >
+                                    <img src="<?php echo getpath(ADMIN_URL.'../uploads/',$v['iname'],'b') ?>">
+                                    <?php echo $v['gname'] ?>
+                                </td>
+                                <td class="h4"><?php echo $value['price'] ?></td>
+                                <td class="h4">
+                                    <?php echo $value['qty'] ?>
+                                </td>
+                                <td class="h4"><?php echo $value['price'] * $value['qty'] ?></td>
+                            </tr>
+                            <tr class="active">
+                                <td class="h4" colspan="1">用户:<?php echo $name ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评价:<?php echo $comment; ?></td>
+                                <td class="h4"  colspan="3"><?php 
+                                    if (@empty($return)) { ?>
+                                        <form action="./action.php" method="post">
+                                            <input type="hidden" name="og_id" value="<?php echo $og_id ?>">
+                                            <input type="hidden" name="p_id" value="<?php echo $p_id ?>">
+                                            回复:&nbsp;&nbsp;<input type="text" name="huifu">&nbsp;&nbsp;
+                                            <input type="submit" value="确定">
+                                            
+                                        </form>
+                             <?php  }else{
+                                    echo $return;
+                                    }
 
-                                     ?></td>
-                                </tr>
-                    <?php } }?>
+                                 ?></td>
+                            </tr>
+                <?php } }?>
         </div>
         </table>
         <?php require ADMIN_PATH.'../com/page.php'; ?>

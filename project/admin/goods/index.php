@@ -120,8 +120,8 @@
             <h2 class="text-center">暂无数据</h2>
         <?php else: ?>
         <?php foreach ($list as $val): ?>
-            <table class="table table-bordered table-hover h4">
-                <tr>
+            <table class="table table-bordered table-hover h4 ">
+                <tr class="info">
                     <th class="col-md-1">ID:<?php echo $val['id'] ?></th>
                     <th class="col-md-2">商品名</th>
                     <th class="col-md-2">所属分类</th>
@@ -133,7 +133,7 @@
                     <th class="col-md-1">热销</th>
                     <th class="col-md-1">新品</th>
                 </tr>
-                <tr>
+                <tr class="active">
                     <td colspan="2"><?php echo $val['gname'] ?></td>
                     <td><?php echo $val['cname'] ?></td>
                     <td><?php echo $val['price'] ?></td>
@@ -156,7 +156,7 @@
                         </a>
                     </td>
                 </tr>
-                <tr>
+                <tr class="active">
                     <td colspan="2">
                     <img src="<?php echo getpath(ADMIN_URL.'../uploads/', $val['iname'], 'b') ?>" class="center-block">
                     </td>
