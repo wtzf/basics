@@ -4,6 +4,7 @@
     $urlname = '';
     $name = '';
     $where='';
+    // 搜素
     if (isset($_GET['name']) && !empty($_GET['name'])) {
         $name = $_GET['name'];
         p($name);
@@ -122,16 +123,16 @@
         <?php foreach ($list as $val): ?>
             <table class="table table-bordered table-hover h4 ">
                 <tr class="info">
-                    <th class="col-md-1">ID:<?php echo $val['id'] ?></th>
-                    <th class="col-md-2">商品名</th>
-                    <th class="col-md-2">所属分类</th>
-                    <th class="col-md-1">价格</th>
-                    <th class="col-md-1">库存</th>
-                    <th class="col-md-1">销量</th>
-                    <th class="col-md-1">赞量</th>
-                    <th class="col-md-1">上架</th>
-                    <th class="col-md-1">热销</th>
-                    <th class="col-md-1">新品</th>
+                    <th class="col-md-1  text-center">ID:<?php echo $val['id'] ?></th>
+                    <th class="col-md-2  text-center">商品名</th>
+                    <th class="col-md-2  text-center">所属分类</th>
+                    <th class="col-md-1  text-center">价格</th>
+                    <th class="col-md-1  text-center">库存</th>
+                    <th class="col-md-1  text-center">销量</th>
+                    <th class="col-md-1  text-center">赞量</th>
+                    <th class="col-md-1  text-center">上架</th>
+                    <th class="col-md-1  text-center">热销</th>
+                    <th class="col-md-1  text-center">新品</th>
                 </tr>
                 <tr class="active">
                     <td colspan="2"><?php echo $val['gname'] ?></td>

@@ -31,17 +31,17 @@
 
         <table class="table table-bordered table-hover h4">
             <tr>
-                <th>ID</th>
-                <th>分类名</th>
-                <th>pid</th>
-                <th>path</th>
-                <th>是否显示</th>
+                <th class=" text-center">ID</th>
+                <th class=" text-center">分类名</th>
+                <th class=" text-center">pid</th>
+                <th class=" text-center">path</th>
+                <th class=" text-center">是否显示</th>
                 <?php 
                 $sql = "SELECT `pid` FROM ".PRE."category WHERE `id`='$pid'";
                 $row = query($link, $sql);
                 $ppid = $row[0]['pid'];
                  ?>
-                <th>相关操作 &nbsp;&nbsp;&nbsp;
+                <th  class=" text-center">相关操作 &nbsp;&nbsp;&nbsp;
                 <a href="./index.php?pid=<?php echo $ppid ?>" class="btn btn-warning btn-sm">返回</a>
 
                 </th>
@@ -56,7 +56,7 @@
                 </tr>
             <?php else: ?>
                 <?php foreach ($list as $val): ?>
-                    <tr>
+                    <tr class=" text-center">
                         <td><?php echo $val['id'] ?></td>
                         <td><?php echo $val['cname'] ?></td>
                         <?php 

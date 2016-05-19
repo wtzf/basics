@@ -35,7 +35,7 @@
             <div class="panel panel-info">
               <div class="panel-heading">最新订单</div>
               <div class="panel-body">
-                Panel content
+                  <a href="./order/index.php">请进入订单管理项查看</a>
               </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             <div class="panel panel-info">
               <div class="panel-heading">订单统计</div>
               <div class="panel-body">
-                GD
+                  <a href="./order/index.php">请进入订单管理项查看</a>
               </div>
             </div>
         </div>
@@ -53,16 +53,16 @@
             <div class="panel panel-info">
               <div class="panel-heading">商城统计</div>
               <div class="panel-body">
-                Panel content
+                此功能正在开发中.......
               </div>
             </div>
         </div>
 
         <div class=" col-md-6">
             <div class="panel panel-info">
-              <div class="panel-heading">Panel heading without title</div>
+              <div class="panel-heading">用户统计</div>
               <div class="panel-body">
-                Panel content
+                  <a href="./user/index.php">请进入用户管理项查看</a>
               </div>
             </div>
         </div>

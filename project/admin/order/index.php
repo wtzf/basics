@@ -16,7 +16,6 @@
         // 根据用户的ID 在订单表中查找出其所有的订单号。订单ID和订单的总价
             $sql = "SELECT `id`,`ordernum`,`allprice`,`status` FROM ".PRE."order WHERE status=$status ORDER BY id DESC";
         }else{
-        $rows = mysqli_affected_rows($link);
         //显示当前页查询到的记录数量
         //分页开始
         //总记录数
@@ -24,7 +23,7 @@
         $row = query($link, $sql);
         $total = $row[0]['total'];
         //每页显示数
-        $num =1;
+        $num =5;
         //总页数
         $allpage = ceil($total / $num);
         //获取页码
@@ -59,6 +58,7 @@
         }
         }
     $str = query($link,$sql);
+    $rows = mysqli_affected_rows($link);
 
 
 
@@ -106,12 +106,12 @@
         </div>
             <table class="table h5 mt20">
                 <tr class="h3 info">
-                    <th>宝贝</th>
-                    <th>单价</th>
-                    <th>数量</th>
-                    <th>总价</th>
-                    <th>状态</th>
-                    <th>操作</th>
+                    <th class=" text-center">宝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贝&nbsp;&nbsp;&nbsp;&nbsp;信&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;息</th>
+                    <th>单&nbsp;&nbsp;价</th>
+                    <th>数&nbsp;&nbsp;量</th>
+                    <th>总&nbsp;&nbsp;价</th>
+                    <th>状&nbsp;&nbsp;态</th>
+                    <th>操&nbsp;&nbsp;作</th>
                 </tr>
             <?php if (empty($str)){?>
                     <tr class="h1 text-center"><td colspan="6" ><b>暂无订单</b></td></tr>

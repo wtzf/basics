@@ -10,8 +10,12 @@
     $sql = "SELECT `id`,`name`,`sex`,`tel`,`email` FROM ".PRE."user WHERE `id`='$user_id'";
     $row = query($link, $sql);
     $row = $row['0'];
+    // p($row);
     $user_name = $row['name'];
+    $user_sex = $row['sex'];
     $user_id = $row['id'];
+    $user_tel = $row['tel'];
+    $user_email = $row['email'];
     if (isset($_GET['status'])) {
       $status = $_GET['status'];
    
@@ -43,7 +47,7 @@
         $row = query($link, $sql);
         $total = $row[0]['total'];
         //每页显示数
-        $num =1;
+        $num =6;
         //总页数
         $allpage = ceil($total / $num);
         //获取页码
@@ -129,19 +133,19 @@
                         <div class="form-group h4">
                           <label for="inputPassword3" class="col-md-2 control-label">性别:</label>
                           <div class="col-md-10">
-                            <input type="text" class="form-control" value="<?php echo $row['sex'] ?>" name="sex" id="inputPassword3">
+                            <input type="text" class="form-control" value="<?php echo $user_sex==0?'女':($user_sex==1?'男':'保密'); ?>" name="sex" id="inputPassword3">
                           </div>
                         </div>
                         <div class="form-group h4">
                           <label for="inputPassword3" class="col-md-2 control-label">电话:</label>
                           <div class="col-md-10">
-                            <input type="text" class="form-control" value="<?php echo $row['tel'] ?>" name="tel" id="inputPassword3">
+                            <input type="text" class="form-control" value="<?php echo $user_tel ?>" name="tel" id="inputPassword3">
                           </div>
                         </div>
                         <div class="form-group h4">
                           <label for="inputPassword4" class="col-md-2 control-label">邮箱:</label>
                           <div class="col-md-10">
-                            <input type="text" class="form-control" value="<?php echo $row['email'] ?>" name="email" id="inputPassword4">
+                            <input type="text" class="form-control" value="<?php echo $user_email ?>" name="email" id="inputPassword4">
                           </div>
                         </div>
                         <div class="form-group">

@@ -80,6 +80,14 @@
                 echo '<meta http-equiv="refresh" content="3;index.php">';
             }
             break;
+
+        case 'dis':
+                $id = $_GET['id'];
+                $forbid = $_GET['forbid']==0?1:0;
+                $sql = "UPDATE ".PRE."user SET `forbid`='$forbid' WHERE `id`='$id'";
+                $a = execute($link,$sql);
+                header("Location:./index.php");
+            break;
     }
 
     //8.关闭连接

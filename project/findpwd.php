@@ -1,4 +1,4 @@
-<!-- 注册页面 -->
+<!--  -->
 <?php require './init.php' ?>
 
 <!DOCTYPE html>

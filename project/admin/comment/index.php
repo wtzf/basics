@@ -74,9 +74,9 @@
     // p($list);
     // exit;
     //显示当前页查询到的记录数量
-    $rows = mysqli_affected_rows($link);
     $sql = "SELECT `id`,`goods_id`,`order_id`,`price`,`qty` FROM ".PRE."ordergoods ORDER BY id DESC LIMIT $offset,$num";
     $str = query($link,$sql);
+    $rows = mysqli_affected_rows($link);
 
 
 
@@ -103,7 +103,7 @@
 <div class="container">
     <div class="row">
         <h1><b>订单列表</b></h1>
-        <nav class="navbar">
+<!--         <nav class="navbar">
           <div class="container-fluid">
             <div class="collapse navbar-collapse">
               <form class="navbar-form navbar-left" >
@@ -112,15 +112,15 @@
                 </div>
                 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
               </form>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
+            </div> /.navbar-collapse -->
+          <!-- </div>/.container-fluid -->
+        <!-- </nav> -->
             <table class="table h5">
                 <tr class="h3 info">
                     <th class="col-md-6 text-center">宝&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贝&nbsp;&nbsp;&nbsp;&nbsp;信&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;息</th>
-                    <th class="col-md-2">单价</th>
-                    <th class="col-md-2">数量</th>
-                    <th class="col-md-2">总价</th>
+                    <th class="col-md-2">单&nbsp;&nbsp;价</th>
+                    <th class="col-md-2">数&nbsp;&nbsp;量</th>
+                    <th class="col-md-2">总&nbsp;&nbsp;价</th>
                 </tr>
             <?php if (empty($str)){?>
                     <tr class="h1 text-center "><td colspan="6" ><b>暂无订单</b></td></tr>

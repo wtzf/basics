@@ -7,7 +7,7 @@
     $arr = query($link,$sql);
     $og_id = $arr['0']['id'];
 
- ?>
+ ?><div></div>
 
 <!DOCTYPE html>
 <html lang="cn">

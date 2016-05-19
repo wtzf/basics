@@ -3,7 +3,7 @@
     $goods_id = $_GET['id'];
     $sql = "SELECT `id` FROM ".PRE."ordergoods WHERE goods_id = $goods_id ORDER BY id DESC";
     $str = query($link,$sql);
-
+  
 
 
 

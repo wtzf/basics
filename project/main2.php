@@ -65,16 +65,14 @@
 
 
     }
+    // 三级菜单的搜素
       $sql = "SELECT `id`,`cname`,`path` FROM ".PRE."category WHERE `display`='1' AND `path` LIKE '0,_,_,'";
       $result = query($link, $sql);
       if (empty($_GET['bpath']) ) {
         $bpath=$result['0']['path'].$result['0']['id'].',';
       }else{
-
         $bpath=$_GET['bpath'].$_GET['cate_id'].',';
-
       }
-      
       // $path=$path.'_,';
       // p($bpath);
       // p($result);
@@ -117,16 +115,16 @@
     <div class="container">
         <div class="row">
           <div class="col-md-12 bdc mt30">
-            <ul class="list-inline h3 bdb c1 mt30">
+            <ul class="list-inline h3 bdb  mt30">
 
             <?php  foreach ($result as  $v) { 
               ?>
-              <li><a href="./main2.php?bpath=<?php echo $v['path'] ?>&cate_id=<?php echo $v['id'] ?>" class=" text-muted c2"><?php echo $v['cname'] ?></a></li>
+              <li><a href="./main2.php?bpath=<?php echo $v['path'] ?>&cate_id=<?php echo $v['id'] ?>" class="text-muted btn btn-primary btn-lg"><?php echo $v['cname'] ?></a></li>
         <?php  } ?>
             </ul>
-            <ul class="list-inline h3 mt20 c3">
-        <?php  foreach ($arr as  $val) { ?>
-              <li><a href="./main2.php?cate_id=<?php echo $val['id'] ?>" class="text-muted "><?php echo $val['cname'] ?></a></li>
+            <ul class="list-inline h3 mt20 ">
+        <?php foreach ($arr as  $val) { ?>
+              <li><a href="./main2.php?cate_id=<?php echo $val['id'] ?>" class="btn btn-info"><?php echo $val['cname'] ?></a></li>
         <?php  } ?>
             </ul>
           </div>
@@ -167,6 +165,7 @@
               </div>
             </div>
           <?php endforeach ?>
+          <div class="cl"></div>
           <?php } ?>
 
         </div><!-- END row -->

@@ -7,8 +7,8 @@
         redirect('用户已登录!','../index.php',1);
         exit;
     }
-    foreach ($_POST as $key => $val) {
-        if ($val == '') {
+    foreach (@$_POST as $key => $val) {
+        if (@$val == '') {
             redirect('请完善表单信息!');
             exit;
         }
@@ -17,7 +17,7 @@
     //验证码的检测
     $vcode = strtolower($_SESSION['vcode']);
     $uservcode = strtolower($_POST['vcode']);
-    if ($vcode != $uservcode) {
+    if (@$vcode != $uservcode) {
         redirect('验证码错误!');
         exit;
     }

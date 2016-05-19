@@ -53,6 +53,7 @@
 
     //处理结果集
     $user_list = query($link,$sql);
+
     //显示当前页查询到的记录数量
     $rows = mysqli_affected_rows($link);
 
@@ -141,7 +142,7 @@
                         <td><?php echo $val['tel'] ?></td>
                         <td><?php echo $val['email'] ?></td>
                         <td><?php echo $val['logincount'] ?></td>
-                        <td><?php echo $val['forbid']==0?'<span class="glyphicon glyphicon-ok"></span>':'<span class="glyphicon glyphicon-remove"></span>'; ?></td>
+                        <td><a href="./action.php?a=dis&id=<?php echo $val['id'] ?>&forbid=<?php echo $val['forbid'] ?>"><?php echo $val['forbid']==0?'<span class="glyphicon glyphicon-ok"></span>':'<span class="glyphicon glyphicon-remove"></span>'; ?></a></td>
                         <td>
                             <a href="./edit.php?id=<?php echo $val['id'] ?>">编辑</a>
                             <a href="./action.php?a=del&id=<?php echo $val['id'] ?>">删除</a>

@@ -9,6 +9,8 @@
 .fl{float:left;}
 .fr{float:right;}
 .cb{clear:both;}
+.cl{clear:left;}
+.cr{clear:right;}
 
 .mt5{margin-top: 5px;}
 .mt10{margin-top: 10px;}
