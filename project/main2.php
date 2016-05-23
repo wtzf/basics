@@ -13,8 +13,8 @@
       $cname = $row1['cname'];
 
       $bpath = $row1['bpath'];
-
-      $id = $row1['id'];
+      
+       $id = $row1['id'];
 
       $sql="SELECT id FROM ".PRE."category WHERE path LIKE '$bpath%'";
         $result=query($link,$sql);

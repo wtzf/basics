@@ -55,7 +55,8 @@
                         foreach ($a as $key => $value) {
                             $state = $value;
                             if ($state['state'] == 0) {
-                                redirect('此商品已下架请重新购买其他商品','./index.php',1);
+                                unset($_SESSION['cart']);
+                                redirect($val['gname'].'已下架请购买其他商品','./index.php',1);
                                 exit;
                             }
                         }
