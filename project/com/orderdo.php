@@ -11,4 +11,4 @@
     $ordernum = date('Ymd').mt_rand(0,9999999999999999);
     $_SESSION['ordernum'][]=$ordernum;
 
-    redirect('订单生成成功,正在为您跳转到确定地址页面','./address.php',1);
+    redirect('订单生成成功,正在为您跳转到确定地址页面','../address.php',1);

@@ -1,6 +1,5 @@
 <?php 
     require '../init.php';
-
     $urlname = '';
     $name = '';
     $where='';

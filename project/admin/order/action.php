@@ -50,20 +50,6 @@
             }
             header("location:".$_SERVER['HTTP_REFERER']);
             break;
-            // 
-        case 'ping':
-            $comment = $_POST['ping'];
-            $p_id = $_POST['p_id'];
-            $o_id = $_POST['o_id'];
-            $og_id = $_POST['og_id'];
-            // p($p_id);
-            // p($og_id);
-            // 插入到评论数据表
-            $sql = "INSERT INTO ".PRE."comment (`og_id`,`p_id`,`comment`) VALUES ('$og_id','$p_id','$comment')";
-            $result= admin_execute($link, $sql);
-            header("location:".ADMIN_URL."../myself.php");
-            exit;
-            break;
         }
 
     //8.关闭连接

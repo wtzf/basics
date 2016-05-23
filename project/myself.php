@@ -7,11 +7,12 @@
 
     $user_id = $_SESSION['home']['id'];
     // 查找数据库个人信息表
-    $sql = "SELECT `id`,`name`,`sex`,`tel`,`email` FROM ".PRE."user WHERE `id`='$user_id'";
+    $sql = "SELECT `id`,`name`,`sex`,`tel`,`email`,`pwd` FROM ".PRE."user WHERE `id`='$user_id'";
     $row = query($link, $sql);
     $row = $row['0'];
     // p($row);
     $user_name = $row['name'];
+    $pwd = $row['pwd'];
     $user_sex = $row['sex'];
     $user_id = $row['id'];
     $user_tel = $row['tel'];
@@ -39,7 +40,6 @@
         // 根据用户的ID 在订单表中查找出其所有的订单号。订单ID和订单的总价
           $sql = "SELECT `id`,`ordernum`,`allprice`,`status` FROM ".PRE."order WHERE user_id = $user_id AND status=$status ORDER BY id DESC";
         }else{
-        $rows = mysqli_affected_rows($link);
         //显示当前页查询到的记录数量
         //分页开始
         //总记录数
@@ -47,7 +47,7 @@
         $row = query($link, $sql);
         $total = $row[0]['total'];
         //每页显示数
-        $num =6;
+        $num =4;
         //总页数
         $allpage = ceil($total / $num);
         //获取页码
@@ -82,6 +82,7 @@
       }
         }
     $str = query($link,$sql);
+    $rows = mysqli_affected_rows($link);
 
     // p($_SESSION);
 ?>
@@ -158,31 +159,57 @@
                 <?php }elseif(@$_GET['a'] == 'pwd'){ ?>
                 <div class="conatiner">
                     <div class="clearfix "></div>
-                    <h1 class="text-center mt50 h1"> <b>设置新密码</b></h1>
-                    <hr>
-                    
-                    <form action="./com/changpwddo.php" method="post" class="form-horizontal col-md-6 col-md-offset-2">
+               <?php     if (empty($_POST['pwd'])) { ?>
+                        
+                    <form action="./myself.php?a=pwd" method="post" class="form-horizontal col-md-6 col-md-offset-2">
                     <div class="form-group h3">
-                        <label for="pwd" class="col-md-4 control-label">新 密 码 </label>
+                        <label for="pwd" class="col-md-4 control-label">原 密 码 </label>
                         <div class="col-md-8">
                             <input type="password" name="pwd" class="form-control input-lg" id="pwd" placeholder="请输入新密码..">
-                            <span >*请输入新密码</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group h3">
-                        <label for="repwd" class="col-md-4 control-label">确认密码</label>
-                        <div class="col-md-8">
-                            <input type="password" name="repwd" class="form-control  input-lg" id="repwd" placeholder="把上面那家伙再来一次">
-                            <span>*请再次输入新密码</span>
+                            <span >*请输入原密码</span>
                         </div>
                     </div>
                       <div class="form-group mt20">
                         <div class="col-md-8 col-md-offset-4">
-                          <button type="submit" class="btn btn-primary btn-lg btn-block">确定修改</button>
+                          <button type="submit" class="btn btn-primary btn-lg btn-block">确定</button>
                         </div>
                       </div>
                     </form>
+                    <?php 
+                    }
+                    if (isset($_POST['pwd']) && !empty($_POST['pwd'])) { 
+                        if (md5($_POST['pwd']) == $pwd) {  ?>
+                            <h1 class="text-center mt50 h1"> <b>设置新密码</b></h1>
+                            <hr>
+                            
+                            <form action="./com/changpwddo.php" method="post" class="form-horizontal col-md-6 col-md-offset-2">
+                            <div class="form-group h3">
+                                <label for="pwd" class="col-md-4 control-label">新 密 码 </label>
+                                <div class="col-md-8">
+                                    <input type="password" name="pwd" class="form-control input-lg" id="pwd" placeholder="请输入新密码..">
+                                    <span >*请输入新密码</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group h3">
+                                <label for="repwd" class="col-md-4 control-label">确认密码</label>
+                                <div class="col-md-8">
+                                    <input type="password" name="repwd" class="form-control  input-lg" id="repwd" placeholder="把上面那家伙再来一次">
+                                    <span>*请再次输入新密码</span>
+                                </div>
+                            </div>
+                              <div class="form-group mt20">
+                                <div class="col-md-8 col-md-offset-4">
+                                  <button type="submit" class="btn btn-primary btn-lg btn-block">确定修改</button>
+                                </div>
+                              </div>
+                            </form>
+                  
+                <?php     
+                        }else{
+                    echo '密码输入错误';
+                  } }
+                    ?>
                     <?php }else{ ?>
                     <nav class="navbar">
                       <div class="container-fluid">

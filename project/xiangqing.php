@@ -41,7 +41,8 @@
     <!-- 评论显示 -->
     <div class="container">
     <div class="row mt50">
-    <h1 class="mt50">评价：</h1>
+    <h1 class="mt50">评论：</h1>
+    <div style="height:3px;" class="col-md-12 bg-danger mt2"></div>
     <?php
     foreach ($str as $key => $v) {
         $og_id=$v['id'];
@@ -65,7 +66,11 @@
                         }?>
                     </h3>
                 </div>
-   <?php }   }  }?>
+   <?php } 
+        }else{ ?>
+          <h1 class="text-center">暂无评论</h1>
+   <?php }
+     }?>
             </div>
         </div>
 

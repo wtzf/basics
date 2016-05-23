@@ -38,6 +38,9 @@
     width: 45px;
     margin-top: -13px;
 }
+.fengo{display: inline;}
+/*.fengo li{width:55px;height:13px;}*/
+.fengo select{width:55px;height:43px;}
 /*===================主页=================================*/
 .sy{width: 160px;
     font-size:15px;

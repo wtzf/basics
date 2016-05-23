@@ -96,7 +96,7 @@
 
             //查询商品的信息
             $sql = "
-                SELECT i.iname, g.id, g.gname, g.price
+                SELECT i.iname, g.id, g.gname, g.price,g.state
                 FROM ".PRE."goods g, ".PRE."image i
                 WHERE g.id = i.goods_id AND i.cover=1 AND g.id='$goods_id'";
             $row = query($link , $sql);
@@ -139,7 +139,7 @@
 
             //查询商品的信息
             $sql = "
-                SELECT i.iname, g.id, g.gname, g.price
+                SELECT i.iname, g.id, g.gname, g.price,g.state
                 FROM ".PRE."goods g, ".PRE."image i
                 WHERE g.id = i.goods_id AND i.cover=1 AND g.id='$goods_id'";
             $row = query($link , $sql);

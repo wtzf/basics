@@ -78,7 +78,7 @@
     <div class="row ">
         <div class="col-md-10 col-md-offset-1 ">
             <h1>评价：</h1>
-            <form action="./admin/order/action.php?a=ping" method="post">
+            <form action="./com/ping.php?a=ping" method="post">
                 <input type="hidden" name="p_id" value=" <?php echo $p_id ?> ">
                 <input type="hidden" name="o_id" value=" <?php echo $order_id ?> ">
                 <input type="hidden" name="g_id" value=" <?php echo $goods_id ?> ">

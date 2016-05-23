@@ -3,7 +3,7 @@
     $goods_id = $_GET['id'];
     //查询商品详情
     $sql = "
-        SELECT i.iname, g.id, g.gname, g.price, g.stock, g.sale, g.msg, g.zan
+        SELECT i.iname, g.id, g.gname, g.price, g.stock, g.sale, g.msg, g.zan, g.state
         FROM ".PRE."goods g, ".PRE."image i
         WHERE g.id = i.goods_id AND i.cover=1 AND g.id='$goods_id';";
 
@@ -81,9 +81,9 @@
                     <!-- <div style="height:3px;" class="col-md-12 bg-primary"></div> -->
                     <div class="col-md-12 mt30">
                         <!-- 点击后跳转到购物车页面 -->
-                        <button type="submit" name="a" value="buy"  class="btn btn-danger btn-lg " <?php echo $list['stock']==0?'disabled':''; ?>>立即购买</button>
+                        <button type="submit" name="a" value="buy"  class="btn btn-danger btn-lg " <?php echo $list['stock']==0?'disabled':''; ?><?php echo $list['state'] ==0?'disabled':'' ?>>立即购买</button>
                         <!-- 点击后只加入购物车的内容,页面不跳转 -->
-                        <button type="submit" name="a" value="add" class="btn btn-success btn-lg ml50" onclick="if(confirm('你确定要加入购物车吗?')==false)return false">加入购物车</button>
+                        <button type="submit" name="a" value="add" class="btn btn-success btn-lg ml50" onclick="if(confirm('你确定要加入购物车吗?')==false)return false" <?php echo $list['state'] ==0?'disabled':'' ?>>加入购物车</button>
                     </div>
                 </div>
             </form>

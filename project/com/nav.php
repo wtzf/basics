@@ -56,7 +56,7 @@
             </ul>
           </li>
 
-          <li><a href="./com/address.php"> <span class="glyphicon glyphicon-th-list" style="color:#666666;font-size:10px"></span> 我的订单</a></li>
+
 
           <li><a href="./shopping.php"> <span class="glyphicon glyphicon-shopping-cart" style="color:#FF4466;font-size:10px"></span> 购物车</a></li>
 

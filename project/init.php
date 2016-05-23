@@ -2,7 +2,7 @@
     //字符集+时间+屏蔽错误+开启session
     header("content-type:text/html;charset=utf-8");
     date_default_timezone_set('PRC');
-    // error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_ERROR));
+    error_reporting(E_ALL ^ (E_NOTICE | E_WARNING | E_ERROR));
     session_start();
 
     //PATH 的拼装

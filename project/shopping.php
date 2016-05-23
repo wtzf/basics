@@ -1,4 +1,6 @@
 <?php require './init.php';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +37,7 @@
             <h3>购物车空空如也....</h3>
             <p><a href="./index.php">[继续购物]</a></p>
         <?php else: ?>
+
             <table class="table h5">
                 <tr class="h3">
                     <th>图片</th>
@@ -45,7 +48,19 @@
                     <th>操作</th>
                 </tr>
                 <?php $total = 0; //总价的初始值?>
-                <?php foreach ($_SESSION['cart'] as $key => $val): ?>
+                <?php foreach ($_SESSION['cart'] as $key => $val): 
+                        $goods_id = $key;
+                        $sql = "SELECT state FROM ".PRE."goods WHERE id = $goods_id";
+                        $a = query($link,$sql);
+                        foreach ($a as $key => $value) {
+                            $state = $value;
+                            if ($state['state'] == 0) {
+                                redirect('此商品已下架请重新购买其他商品','./index.php',1);
+                                exit;
+                            }
+                        }
+                        ?>
+
                 <tr>
                     <td>
                         <a href="./xiangqing.php?id=<?php echo $key ?>&gname=<?php echo $val['gname'] ?>">
@@ -59,18 +74,18 @@
                     </td>
                     <td class="h4"><?php echo $val['price'] ?></td>
                     <td>
-                        <a href="./com/cartdo.php?a=jian&goods_id=<?php echo $key ?>&qty=<?php echo $val['qty'] ?>">
+                        <a href="./com/cartdo.php?a=jian&goods_id=<?php echo $goods_id ?>&qty=<?php echo $val['qty'] ?>">
                             <span class="glyphicon glyphicon-minus"></span>
                         </a>
                         [ <?php echo $val['qty'] ?> ]
-                        <a href="./com/cartdo.php?a=jia&goods_id=<?php echo $key ?>&qty=<?php echo $val['qty'] ?>">
+                        <a href="./com/cartdo.php?a=jia&goods_id=<?php echo $goods_id ?>&qty=<?php echo $val['qty'] ?>">
                             <span class="glyphicon glyphicon-plus"></span>
                         </a>
                         
                     </td>
                     <td class="h4"><?php echo $val['price'] * $val['qty'] ?></td>
                     <td class="h4">
-                        <a href="./com/cartdo.php?a=del&goods_id=<?php echo $key ?>">删除</a>
+                        <a href="./com/cartdo.php?a=del&goods_id=<?php echo $goods_id ?>">删除</a>
                     </td>
                 </tr>
                 <?php $total += $val['price'] * $val['qty'];//总价 ?>
@@ -80,7 +95,7 @@
                         <a href="./index.php" class="btn btn-success btn-lg">继续购物</a>
                         <a href="./com/cartdo.php?a=alldel" class="btn btn-danger btn-lg">清空购物车</a>
                         <a  class="btn btn-default btn-lg">总计: <?php echo $total ?></a>
-                        <a href="./com/orderdo.php?a=add&goods_id=<?php echo $key ?>" class="btn btn-primary btn-lg">去结算</a>
+                        <a href="./com/orderdo.php?a=add&goods_id=<?php echo $goods_id ?>" class="btn btn-primary btn-lg">去结算</a>
                     </td>
                 </tr>
             </table>
